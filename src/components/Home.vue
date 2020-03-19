@@ -1,5 +1,5 @@
 <template>
-  <el-container class="home-container">
+  <el-container class="home-container" ref="homePage">
     <!-- header -->
     <el-header>
       <div>
@@ -66,7 +66,7 @@
         </el-menu>
       </el-aside>
       <!-- body right -->
-      <el-main>
+      <el-main ref="body">
         <!-- route placeholder -->
         <router-view></router-view>
       </el-main>
@@ -78,11 +78,24 @@
 export default {
   data () {
     return {
-      isCollapsed: false
+      isCollapsed: false,
+      clientHeight: ''
     }
   },
   created () {
     this.activePath = window.sessionStorage.getItem('activePath')
+  },
+  mounted () {
+    // 获取浏览器可视区域高度
+    this.clientHeight = `${document.documentElement.clientHeight}`
+    window.onresize = function temp () {
+      this.clientHeight = `${document.documentElement.clientHeight}`
+    }
+  },
+  watch: {
+    clientHeight: function () {
+      this.changeFixed(this.clientHeight)
+    }
   },
   methods: {
     logout () {
@@ -91,6 +104,10 @@ export default {
     },
     toggleCollapse () {
       this.isCollapsed = !this.isCollapsed
+    },
+    changeFixed (clientHeight) {
+      this.$refs.homePage.$el.style.height = clientHeight
+      this.$refs.body.$el.style.height = clientHeight - 60 + 'px'
     }
   }
 }
