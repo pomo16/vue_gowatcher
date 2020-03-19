@@ -77,7 +77,7 @@ export default {
         const { data: res } = await this.$http.post('/auth/login', this.loginForm)
         if (res.status_code !== 200) return this.$message.error('login failed!')
         this.$message.success('login success!')
-        window.sessionStorage.setItem('token', res.token)
+        window.localStorage.setItem('token', res.token)
         await this.$router.push('/home')
       })
     }

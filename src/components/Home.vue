@@ -6,7 +6,7 @@
         <img src="../assets/gowatcher.png" alt="">
         <span>gowatcher</span>
       </div>
-      <el-button type="info" @click="logout">退出</el-button>
+      <el-button type="info" @click="showDialog">退出</el-button>
     </el-header>
     <!-- body -->
     <el-container>
@@ -71,6 +71,17 @@
         <router-view></router-view>
       </el-main>
     </el-container>
+    <!-- dialog -->
+    <el-dialog
+      title="退出登录"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <span>确定退出登录吗？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="danger" @click="logout">退 出</el-button>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
   </el-container>
 </template>
 
@@ -79,7 +90,8 @@ export default {
   data () {
     return {
       isCollapsed: false,
-      clientHeight: ''
+      clientHeight: '',
+      dialogVisible: false
     }
   },
   mounted () {
@@ -97,7 +109,7 @@ export default {
   methods: {
     async logout () {
       await this.$http.get('/monitor/logout')
-      window.sessionStorage.clear()
+      window.localStorage.clear()
       this.$router.push('/login')
     },
     toggleCollapse () {
@@ -106,6 +118,9 @@ export default {
     changeFixed (clientHeight) {
       this.$refs.homePage.$el.style.height = clientHeight
       this.$refs.body.$el.style.height = clientHeight - 60 + 'px'
+    },
+    showDialog () {
+      this.dialogVisible = true
     }
   }
 }

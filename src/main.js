@@ -12,7 +12,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:8888'
 axios.interceptors.request.use(
   config => {
-    const token = window.sessionStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = token
     } else {
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          window.sessionStorage.clear()
+          window.localStorage.clear()
           router.replace({
             path: '/login'
           })
