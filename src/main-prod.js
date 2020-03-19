@@ -9,7 +9,7 @@ import './assets/css/global.css'
 
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8888'
+axios.defaults.baseURL = 'http://112.74.86.176:8888'
 axios.interceptors.request.use(
   config => {
     const token = window.localStorage.getItem('token')
