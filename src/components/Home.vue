@@ -82,9 +82,6 @@ export default {
       clientHeight: ''
     }
   },
-  created () {
-    this.activePath = window.sessionStorage.getItem('activePath')
-  },
   mounted () {
     // 获取浏览器可视区域高度
     this.clientHeight = `${document.documentElement.clientHeight}`
@@ -98,7 +95,8 @@ export default {
     }
   },
   methods: {
-    logout () {
+    async logout () {
+      await this.$http.get('/monitor/logout')
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
