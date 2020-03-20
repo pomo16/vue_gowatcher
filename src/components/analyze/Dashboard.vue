@@ -84,10 +84,10 @@
         <el-table-column label="情感" width="130px">
           <template slot-scope="scope">
             <span v-if="scope.row.polarity === 'pos'"><el-tag type="success" size="mini"
-                                                              effect="light">pos</el-tag></span>
+                                                              effect="light">positive</el-tag></span>
             <span v-if="scope.row.polarity === 'net'"><el-tag type="warning" size="mini"
-                                                              effect="light">net</el-tag></span>
-            <span v-if="scope.row.polarity === 'neg'"><el-tag type="danger" size="mini" effect="light">neg</el-tag></span>
+                                                              effect="light">neutral</el-tag></span>
+            <span v-if="scope.row.polarity === 'neg'"><el-tag type="danger" size="mini" effect="light">negative</el-tag></span>
           </template>
         </el-table-column>
         <el-table-column label="情感分数" prop="score" width="130px"></el-table-column>
@@ -147,13 +147,13 @@
       <div class="item">
         <div class="item-title">情感标签</div>
         <div class="item-content" v-if="comment.polarity === 'pos'">
-          <el-tag type="success" size="mini" effect="light">pos</el-tag>
+          <el-tag type="success" size="mini" effect="light">positive</el-tag>
         </div>
         <div class="item-content" v-if="comment.polarity === 'net'">
-          <el-tag type="warning" size="mini" effect="light">net</el-tag>
+          <el-tag type="warning" size="mini" effect="light">neutral</el-tag>
         </div>
         <div class="item-content" v-if="comment.polarity === 'neg'">
-          <el-tag type="danger" size="mini" effect="light">neg</el-tag>
+          <el-tag type="danger" size="mini" effect="light">negative</el-tag>
         </div>
       </div>
       <div class="item">
@@ -424,7 +424,7 @@ export default {
         }
 
         .icon-neg {
-          background: #f4516c
+          background: #f4516c;
         }
       }
 
@@ -441,7 +441,7 @@ export default {
       }
 
       .icon-neg {
-        color: #f4516c
+        color: #f4516c;
       }
 
       .card-panel-icon-wrapper {
