@@ -8,6 +8,7 @@ import Ability from '../components/analyze/Ability'
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
