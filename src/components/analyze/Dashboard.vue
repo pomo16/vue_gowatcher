@@ -69,8 +69,8 @@
     <!-- comment table -->
     <el-card>
       <el-table :data="comment_list">
-        <el-table-column label="评论时间" prop="publish_time" width="170px"></el-table-column>
-        <el-table-column label="内容" prop="content" width="270px"></el-table-column>
+        <el-table-column label="评论时间" prop="publish_time"></el-table-column>
+        <el-table-column label="内容" prop="content"></el-table-column>
         <el-table-column label="评分" width="170px">
           <template slot-scope="scope">
             <el-rate
@@ -80,8 +80,8 @@
             </el-rate>
           </template>
         </el-table-column>
-        <el-table-column label="应用" prop="app_name" width="130px"></el-table-column>
-        <el-table-column label="情感" width="130px">
+        <el-table-column label="应用" prop="app_name"></el-table-column>
+        <el-table-column label="情感">
           <template slot-scope="scope">
             <span v-if="scope.row.polarity === 'pos'"><el-tag type="success" size="mini"
                                                               effect="light">positive</el-tag></span>
@@ -90,7 +90,7 @@
             <span v-if="scope.row.polarity === 'neg'"><el-tag type="danger" size="mini" effect="light">negative</el-tag></span>
           </template>
         </el-table-column>
-        <el-table-column label="情感分数" prop="score" width="130px"></el-table-column>
+        <el-table-column label="情感分数" prop="score"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="showDialog(scope.row)">评论详情</el-button>

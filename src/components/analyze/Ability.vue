@@ -52,11 +52,7 @@ export default {
         content: ''
       },
       text: '',
-      analyzeResult: [{
-        content: '',
-        score: 0,
-        polarity: ''
-      }],
+      analyzeResult: [],
       option: {
         toolbox: {
           feature: {
@@ -68,7 +64,11 @@ export default {
           {
             name: '情感分数',
             type: 'gauge',
-            detail: { formatter: 0 },
+            detail: {
+              formatter: function (params) {
+                return (params / 100).toFixed(3)
+              }
+            },
             data: [{ value: 0 }],
             splitNumber: 5,
             axisLine: {
@@ -104,7 +104,6 @@ export default {
         return this.$message.error('不能分析空文本哦！')
       }
       this.analyzeResult = [res.data]
-      this.option.series[0].detail.formatter = this.analyzeResult[0].score
       this.option.series[0].data[0].value = this.analyzeResult[0].score * 100
       this.myChart.setOption(this.option, true)
     }
