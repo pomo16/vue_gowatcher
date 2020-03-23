@@ -41,7 +41,6 @@ export default {
   methods: {
     async getTaskList () {
       const { data: res } = await this.$http.get('/monitor/crawl/list', { params: this.queryListInfo })
-      console.log(res)
       if (res.message !== 'success') {
         return this.$message.error('列表数据获取失败！')
       }
