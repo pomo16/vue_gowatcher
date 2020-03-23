@@ -66,12 +66,25 @@
     <el-card class="echarts-card">
       <div id="main" class="echarts-div"></div>
     </el-card>
-    <!-- comment table -->
+    <!-- comment list -->
     <el-card>
+      <el-input
+        type="text"
+        placeholder="请输入关键词"
+        v-model="text"
+        maxlength="10"
+        show-word-limit>
+      </el-input>
+      <el-button type="primary" @click="search" class="searchBtn">搜索</el-button>
+      <!-- comment table -->
       <el-table :data="comment_list">
         <el-table-column label="评论时间" prop="publish_time"></el-table-column>
-        <el-table-column label="内容" prop="content"></el-table-column>
-        <el-table-column label="评分" width="170px">
+        <el-table-column label="内容" prop="content">
+          <template slot-scope="scope">
+            <span v-html="brightenKeyword(scope.row.content)" ></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="评分">
           <template slot-scope="scope">
             <el-rate
               v-model="scope.row.rating"
@@ -188,14 +201,16 @@ export default {
       queryCountInfo: {
         begin_time: '',
         end_time: '',
-        polarity: ''
+        polarity: '',
+        keyword: ''
       },
       queryListInfo: {
         begin_time: '',
         end_time: '',
         q_type: 2,
         limit: 10,
-        offset: 0
+        offset: 0,
+        keyword: ''
       },
       queryHistogramInfo: {
         begin_time: '',
@@ -209,13 +224,15 @@ export default {
       comment_list: [],
       comment: {},
       total: 0,
-      dialogVisible: false
+      dialogVisible: false,
+      text: '',
+      searchWord: ''
     }
   },
   created () {
     this.getTimeStamp()
     this.getCounts()
-    this.getCommentList()
+    this.getCommentList('')
   },
   async mounted () {
     const myChart = echarts.init(document.getElementById('main'))
@@ -318,11 +335,18 @@ export default {
     },
     async getCommentList () {
       const { data: res } = await this.$http.get('/monitor/comment/list', { params: this.queryListInfo })
-      if (res.message !== 'success') {
+      if (res.message === 'error') {
+        // empty error
+        if (res.err_no === 3003) {
+          this.comment_list = []
+          this.total = 0
+          return
+        }
         return this.$message.error('列表数据获取失败！')
+      } else {
+        this.comment_list = res.data.comment_list
+        this.total = await this.getCountsHelper('')
       }
-      this.comment_list = res.data.comment_list
-      this.total = await this.getCountsHelper('')
     },
     // watching size
     handleSizeChange (newSize) {
@@ -347,6 +371,23 @@ export default {
         return this.$message.error('直方图数据获取失败！')
       }
       return { counts: res.data.counts, times: res.data.times }
+    },
+    search () {
+      this.queryListInfo.offset = 0
+      this.queryListInfo.limit = 10
+      this.searchWord = this.text
+      this.queryListInfo.keyword = this.searchWord
+      this.queryCountInfo.keyword = this.searchWord
+      this.getCommentList()
+    },
+    brightenKeyword (val) {
+      val = val + ''
+      const keyword = this.searchWord
+      if (val.indexOf(keyword) !== -1 && keyword !== '') {
+        return val.replace(keyword, '<span style="color: #f4516c; ">' + keyword + '</span>')
+      } else {
+        return val
+      }
     }
   }
 }
@@ -365,6 +406,14 @@ export default {
   .echarts-div {
     width: 100%;
     height: 400px;
+  }
+
+  .el-input {
+    width: 400px;
+  }
+
+  .searchBtn {
+    margin-left: 20px;
   }
 
   .el-table {

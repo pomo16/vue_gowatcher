@@ -44,25 +44,25 @@
             </el-menu-item>
           </el-submenu>
           <!-- level 1 menu -->
-<!--          <el-submenu index="2">-->
-<!--            <template slot="title">-->
-<!--              <i class="iconfont icon-baobiao"></i>-->
-<!--              <span>任务管理</span>-->
-<!--            </template>-->
-<!--            &lt;!&ndash; level 2 menu &ndash;&gt;-->
-<!--            <el-menu-item index="/task_list">-->
-<!--              <template slot="title">-->
-<!--                <i class="iconfont icon-baobiao1"></i>-->
-<!--                <span>任务列表</span>-->
-<!--              </template>-->
-<!--            </el-menu-item>-->
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="iconfont icon-shezhi"></i>
+              <span>任务管理</span>
+            </template>
+            <!-- level 2 menu -->
+            <el-menu-item index="/task">
+              <template slot="title">
+                <i class="iconfont icon-liebiao"></i>
+                <span>任务列表</span>
+              </template>
+            </el-menu-item>
 <!--            <el-menu-item index="/task_edit">-->
 <!--              <template slot="title">-->
 <!--                <i class="iconfont icon-power"></i>-->
 <!--                <span>编辑任务</span>-->
 <!--              </template>-->
 <!--            </el-menu-item>-->
-<!--          </el-submenu>-->
+          </el-submenu>
         </el-menu>
       </el-aside>
       <!-- body right -->

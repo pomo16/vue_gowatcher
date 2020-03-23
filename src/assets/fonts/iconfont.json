@@ -62,6 +62,20 @@
       "unicode_decimal": 58954
     },
     {
+      "icon_id": "2542480",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "10262050",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
       "icon_id": "11349260",
       "name": "normal-l",
       "font_class": "normal-l",

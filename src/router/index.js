@@ -4,6 +4,7 @@ import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Dashboard from '../components/analyze/Dashboard'
 import Ability from '../components/analyze/Ability'
+import Task from '../components/task/Task.vue'
 
 Vue.use(Router)
 
@@ -18,7 +19,8 @@ const router = new Router({
       redirect: '/dashboard',
       children: [
         { path: '/dashboard', component: Dashboard },
-        { path: '/ability', component: Ability }
+        { path: '/ability', component: Ability },
+        { path: '/task', component: Task }
       ]
     }
   ]
