@@ -30,7 +30,7 @@ const router = new Router({
 
 // Mount routing navigation guard
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') return next()
+  if (to.path === '/login' || to.path === '/register') return next()
   const tokenStr = window.localStorage.getItem('token')
   if (!tokenStr) return next('/login')
   next()
