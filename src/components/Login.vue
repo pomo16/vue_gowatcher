@@ -9,16 +9,17 @@
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
         <!-- username -->
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user_login"></el-input>
+          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user_login" type="text" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <!-- password -->
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="iconfont icon-3702mima" type="password"></el-input>
+          <el-input v-model="loginForm.password" prefix-icon="iconfont icon-3702mima" type="password" placeholder="请输入密码"></el-input>
         </el-form-item>
         <!-- button -->
         <el-form-item class="btns">
           <el-button type="primary" @click="login">登录</el-button>
           <el-button type="info" @click="resetLoginForm">重置</el-button>
+          <el-button type="danger" @click="toRegister">前往注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -80,6 +81,9 @@ export default {
         window.localStorage.setItem('token', res.token)
         await this.$router.push('/home')
       })
+    },
+    toRegister () {
+      this.$router.push('/register')
     }
   }
 }

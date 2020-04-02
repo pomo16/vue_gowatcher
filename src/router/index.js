@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/Login.vue'
+import Register from '../components/Register'
 import Home from '../components/Home.vue'
 import Dashboard from '../components/analyze/Dashboard'
 import Ability from '../components/analyze/Ability'
@@ -13,6 +14,7 @@ const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
+    { path: '/register', component: Register },
     {
       path: '/home',
       component: Home,
