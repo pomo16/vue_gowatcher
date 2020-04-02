@@ -98,8 +98,8 @@ export default {
         await this.$router.push('/login')
       })
     },
-    toLogin () {
-      this.$router.push('/login')
+    async toLogin () {
+      await this.$router.push('/login')
     }
   }
 }

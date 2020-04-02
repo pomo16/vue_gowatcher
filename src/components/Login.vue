@@ -82,8 +82,8 @@ export default {
         await this.$router.push('/home')
       })
     },
-    toRegister () {
-      this.$router.push('/register')
+    async toRegister () {
+      await this.$router.push('/register')
     }
   }
 }
